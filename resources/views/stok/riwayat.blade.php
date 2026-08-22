@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Riwayat Stok - SI Inventory')
+@section('title', 'Riwayat Stok - SRC Rully')
 
 @section('content_header')
     <h1>Riwayat Stok: {{ $product->name }}</h1>

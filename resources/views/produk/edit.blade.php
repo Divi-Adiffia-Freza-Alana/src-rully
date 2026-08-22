@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Edit Produk - SI Inventory')
+@section('title', 'Edit Produk - SRC Rully')
 
 @section('content_header')
     <h1>Edit Produk</h1>

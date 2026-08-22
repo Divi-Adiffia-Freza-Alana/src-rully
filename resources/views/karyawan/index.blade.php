@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Karyawan - SI Inventory')
+@section('title', 'Karyawan - SRC Rully')
 
 @section('content_header')
     <h1>Karyawan</h1>

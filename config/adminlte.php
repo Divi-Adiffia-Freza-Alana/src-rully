@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'SI Inventory',
+    'title' => 'SRC Rully',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>SI</b> Inventory',
+    'logo' => '<b>SRC</b> Rully',
     'logo_img' => 'images/logo.jpeg',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,

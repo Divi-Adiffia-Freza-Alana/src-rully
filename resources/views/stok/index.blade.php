@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Stok - SI Inventory')
+@section('title', 'Stok - SRC Rully')
 
 @section('content_header')
     <h1>Stok</h1>
