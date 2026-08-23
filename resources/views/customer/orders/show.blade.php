@@ -57,7 +57,7 @@
                     @if ($order->payment_method === 'transfer')
                         @if ($order->payment_proof_path)
                             <p class="mb-2"><strong>Bukti Transfer:</strong></p>
-                            <img src="{{ Storage::url($order->payment_proof_path) }}" alt="Bukti transfer" class="img-fluid rounded border mb-2">
+                            <img src="{{ Storage::disk('public')->url($order->payment_proof_path) }}" alt="Bukti transfer" class="img-fluid rounded border mb-2">
                         @endif
 
                         @if ($order->status === 'pending')

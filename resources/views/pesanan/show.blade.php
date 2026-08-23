@@ -56,7 +56,7 @@
                 <div class="card">
                     <div class="card-header"><strong>Bukti Transfer</strong></div>
                     <div class="card-body">
-                        <img src="{{ Storage::url($order->payment_proof_path) }}" alt="Bukti transfer" class="img-fluid rounded border">
+                        <img src="{{ Storage::disk('public')->url($order->payment_proof_path) }}" alt="Bukti transfer" class="img-fluid rounded border">
                     </div>
                 </div>
             @endif
