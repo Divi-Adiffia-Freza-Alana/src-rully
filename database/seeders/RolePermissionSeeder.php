@@ -20,6 +20,8 @@ class RolePermissionSeeder extends Seeder
             'stok.kelola' => 'Stok',
             'penjualan.lihat' => 'Penjualan',
             'penjualan.kelola' => 'Penjualan',
+            'pesanan.lihat' => 'Pesanan Online',
+            'pesanan.kelola' => 'Pesanan Online',
             'laporan.lihat' => 'Laporan',
             'karyawan.lihat' => 'Karyawan',
             'karyawan.kelola' => 'Karyawan',
@@ -50,6 +52,8 @@ class RolePermissionSeeder extends Seeder
                 'stok.lihat',
                 'penjualan.lihat',
                 'penjualan.kelola',
+                'pesanan.lihat',
+                'pesanan.kelola',
             ])->pluck('id')
         );
     }
