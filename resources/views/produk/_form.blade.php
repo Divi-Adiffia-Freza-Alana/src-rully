@@ -162,12 +162,28 @@
         if (e.target.classList.contains('remove-unit-row')) {
             if (table.querySelectorAll('tr').length > 1) {
                 e.target.closest('tr').remove();
+
+                if (!table.querySelector('input[name="units_base_index"]:checked')) {
+                    var firstRadio = table.querySelector('input[name="units_base_index"]');
+                    if (firstRadio) {
+                        firstRadio.checked = true;
+                    }
+                }
             }
         }
     });
 
     document.querySelector('form').addEventListener('submit', function () {
         var checked = table.querySelector('input[name="units_base_index"]:checked');
+
+        if (!checked) {
+            var firstRadio = table.querySelector('input[name="units_base_index"]');
+            if (firstRadio) {
+                firstRadio.checked = true;
+                checked = firstRadio;
+            }
+        }
+
         table.querySelectorAll('tr').forEach(function (tr, i) {
             var hidden = document.createElement('input');
             hidden.type = 'hidden';
