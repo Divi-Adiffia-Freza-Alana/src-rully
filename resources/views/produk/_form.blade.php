@@ -116,7 +116,8 @@
                            class="form-control" value="{{ $row['sell_price'] }}" required>
                 </td>
                 <td class="text-center">
-                    <input type="radio" name="units_base_index" value="{{ $i }}" @checked($row['is_base']) style="transform: scale(1.5)">
+                    <input type="radio" name="units_base_index" class="base-radio" value="{{ $i }}" @checked($row['is_base']) style="transform: scale(1.5)">
+                    <input type="hidden" name="units[{{ $i }}][is_base]" class="base-flag" value="{{ $row['is_base'] ? '1' : '0' }}">
                 </td>
                 <td class="text-center">
                     <button type="button" class="btn btn-danger btn-sm remove-unit-row">&times;</button>
@@ -151,49 +152,56 @@
             '<td><select name="units[' + index + '][unit_id]" class="form-control" required>' + options + '</select></td>' +
             '<td><input type="number" step="0.001" min="0.001" name="units[' + index + '][conversion_to_base]" class="form-control" value="1" required></td>' +
             '<td><input type="number" step="0.01" min="0" name="units[' + index + '][sell_price]" class="form-control" required></td>' +
-            '<td class="text-center"><input type="radio" name="units_base_index" value="' + index + '" style="transform: scale(1.5)"></td>' +
+            '<td class="text-center">' +
+                '<input type="radio" name="units_base_index" class="base-radio" value="' + index + '" style="transform: scale(1.5)">' +
+                '<input type="hidden" name="units[' + index + '][is_base]" class="base-flag" value="0">' +
+            '</td>' +
             '<td class="text-center"><button type="button" class="btn btn-danger btn-sm remove-unit-row">&times;</button></td>';
 
         table.appendChild(tr);
         index++;
     });
 
+    function syncBaseFlags() {
+        var rows = table.querySelectorAll('tr');
+        var anyChecked = table.querySelector('input.base-radio:checked') !== null;
+
+        if (!anyChecked && rows.length > 0) {
+            var firstRadio = rows[0].querySelector('input.base-radio');
+            if (firstRadio) {
+                firstRadio.checked = true;
+            }
+        }
+
+        rows.forEach(function (tr) {
+            var radioEl = tr.querySelector('input.base-radio');
+            var flagEl = tr.querySelector('input.base-flag');
+            if (radioEl && flagEl) {
+                flagEl.value = radioEl.checked ? '1' : '0';
+            }
+        });
+    }
+
+    table.addEventListener('change', function (e) {
+        if (e.target.classList.contains('base-radio')) {
+            syncBaseFlags();
+        }
+    });
+
     table.addEventListener('click', function (e) {
         if (e.target.classList.contains('remove-unit-row')) {
             if (table.querySelectorAll('tr').length > 1) {
                 e.target.closest('tr').remove();
-
-                if (!table.querySelector('input[name="units_base_index"]:checked')) {
-                    var firstRadio = table.querySelector('input[name="units_base_index"]');
-                    if (firstRadio) {
-                        firstRadio.checked = true;
-                    }
-                }
+                syncBaseFlags();
             }
         }
     });
 
     document.querySelector('form').addEventListener('submit', function () {
-        var checked = table.querySelector('input[name="units_base_index"]:checked');
-
-        if (!checked) {
-            var firstRadio = table.querySelector('input[name="units_base_index"]');
-            if (firstRadio) {
-                firstRadio.checked = true;
-                checked = firstRadio;
-            }
-        }
-
-        table.querySelectorAll('tr').forEach(function (tr, i) {
-            var hidden = document.createElement('input');
-            hidden.type = 'hidden';
-            var isBase = checked && checked.closest('tr') === tr;
-            var nameMatch = tr.querySelector('select[name^="units["]').name.match(/units\[(\d+)\]/);
-            hidden.name = 'units[' + nameMatch[1] + '][is_base]';
-            hidden.value = isBase ? '1' : '0';
-            tr.appendChild(hidden);
-        });
+        syncBaseFlags();
     });
+
+    syncBaseFlags();
 })();
 </script>
 @endpush
