@@ -7,6 +7,12 @@
     ])->all() ?? [
         ['unit_id' => '', 'conversion_to_base' => 1, 'sell_price' => '', 'is_base' => true],
     ]);
+    $existingUnits = collect($existingUnits)->map(fn ($row) => [
+        'unit_id' => $row['unit_id'] ?? '',
+        'conversion_to_base' => $row['conversion_to_base'] ?? 1,
+        'sell_price' => $row['sell_price'] ?? '',
+        'is_base' => filter_var($row['is_base'] ?? false, FILTER_VALIDATE_BOOLEAN),
+    ])->all();
 @endphp
 
 <div class="row">
