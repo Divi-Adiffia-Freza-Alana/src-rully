@@ -339,12 +339,6 @@ return [
             'url' => 'penjualan/riwayat',
         ],
         [
-            'text' => 'Pesanan Online',
-            'icon' => 'fas fa-fw fa-shopping-bag',
-            'can' => 'pesanan.lihat',
-            'url' => 'pesanan',
-        ],
-        [
             'text' => 'Laporan Penjualan',
             'icon' => 'fas fa-fw fa-chart-line',
             'can' => 'laporan.lihat',

@@ -14,18 +14,6 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'permission' => \App\Http\Middleware\CheckPermission::class,
         ]);
-
-        $middleware->redirectGuestsTo(function ($request) {
-            return $request->is('keranjang*', 'checkout*', 'pesanan-saya*', 'keluar*')
-                ? route('customer.login')
-                : route('login');
-        });
-
-        $middleware->redirectUsersTo(function ($request) {
-            return $request->is('masuk*', 'register*')
-                ? route('customer.catalog')
-                : route('dashboard');
-        });
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
