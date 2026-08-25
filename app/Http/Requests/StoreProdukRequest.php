@@ -18,7 +18,6 @@ class StoreProdukRequest extends FormRequest
 
         return [
             'category_id' => ['nullable', 'exists:categories,id'],
-            'base_unit_id' => ['required', 'exists:units,id'],
             'sku' => ['required', 'string', 'max:50', Rule::unique('products', 'sku')->ignore($productId)],
             'name' => ['required', 'string', 'max:255'],
             'purchase_price' => ['required', 'numeric', 'min:0'],
